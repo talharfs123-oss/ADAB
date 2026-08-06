@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ADAB — Beyond The Expected</title>
+<!--
+  ADAB — front page concept mockup. Single file, opens by double-click.
+
+  IMAGES
+  Make an "assets" folder next to this file:
+    assets/afridi.jpg    left panel
+    assets/tabish.jpg    right panel
+  Each <img> deletes itself if the file is missing, so the placeholder
+  stays until you drop the real shoot in. Nothing breaks.
+
+  DISPLAY FONT
+  "BEYOND THE EXPECTED" in your reference uses a custom art-deco face.
+  Bodoni Moda is the closest free stand-in and is loaded below. When the
+  client supplies the real font, swap --font-deco.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,700;6..96,900&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1e3057;
+  --navy-deep:#16233f;
+  --blue-mid:#5f7cae;
+  --gold:#c2a24c;
+  --paper:#ffffff;
+  --ink:#1e3057;
+  --muted:#6f7a90;
+  --line:rgba(30,48,87,.16);
+  --font-serif:"Cormorant Garamond",Georgia,serif;
+  --font-deco:"Bodoni Moda",Didot,"Times New Roman",serif;
+  --head-h:104px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-serif);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ---------------- header ---------------- */
+.site-head{position:fixed;inset:0 0 auto;z-index:80;height:var(--head-h);display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(20px,3.4vw,54px);
+  background:linear-gradient(180deg,rgba(9,16,30,.62),rgba(9,16,30,.18) 62%,transparent);
+  color:#fff;transition:background .45s ease,backdrop-filter .45s ease,box-shadow .45s ease}
+.site-head .wordmark img{filter:brightness(0) invert(1);transition:filter .45s ease}
+.site-head .inquire{border-color:rgba(255,255,255,.7);color:#fff}
+.site-head .inquire:hover{background:#fff;color:var(--navy)}
+.site-head .burger span{background:#fff}
+
+/* the moment you scroll, the bar goes light and the mark returns to navy */
+.site-head.is-solid{
+  background:rgba(248,249,251,.94);
+  -webkit-backdrop-filter:blur(20px) saturate(170%);backdrop-filter:blur(20px) saturate(170%);
+  border-bottom:1px solid rgba(30,48,87,.10);
+  box-shadow:0 8px 26px rgba(12,22,44,.08)}
+.site-head.is-solid .wordmark img{filter:none}
+.site-head.is-solid .inquire{border-color:var(--navy);color:var(--navy)}
+.site-head.is-solid .inquire:hover{background:var(--navy);color:#fff}
+.site-head.is-solid .burger span{background:var(--navy)}
+.wordmark{display:block;width:clamp(112px,13vw,178px);line-height:0}
+.wordmark img{width:100%;height:auto}
+.head-right{display:flex;align-items:center;gap:clamp(16px,2.4vw,34px)}
+.inquire{display:inline-flex;align-items:center;justify-content:center;min-width:130px;height:40px;padding:0 22px;border:1px solid var(--navy);border-radius:999px;
+  font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);background:transparent;transition:background .3s ease,color .3s ease}
+.inquire:hover{background:var(--navy);color:#fff}
+.burger{display:grid;gap:6px;width:38px;padding:0;border:0;background:none;cursor:pointer}
+.burger span{display:block;height:2px;background:var(--navy);transition:transform .35s ease,opacity .25s ease}
+.burger.is-open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger.is-open span:nth-child(2){opacity:0}
+.burger.is-open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+.drawer{position:fixed;inset:var(--head-h) 0 auto;z-index:70;display:grid;gap:2px;max-height:0;overflow:hidden;
+  background:linear-gradient(180deg,rgba(12,20,36,.92),rgba(12,20,36,.86));color:#fff;
+  -webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);
+  transition:max-height .45s cubic-bezier(.19,1,.22,1)}
+.drawer.is-open{max-height:340px}
+.drawer a{padding:16px clamp(20px,3.4vw,54px);border-top:1px solid rgba(255,255,255,.14);font-size:17px;letter-spacing:.18em;text-transform:uppercase}
+.drawer a:hover{background:rgba(255,255,255,.08)}
+
+/* ---------------- diagonal split hero ---------------- */
+/* hero runs under the fixed header so the glass has something to blur */
+.split{position:relative;height:100svh;min-height:560px;background:#fff;overflow:hidden}
+.panel{position:absolute;inset:0;overflow:hidden;background:linear-gradient(155deg,#2b3a5c,#101827 62%);transition:clip-path .8s cubic-bezier(.19,1,.22,1)}
+.panel-l{clip-path:polygon(0 0,53% 0,47% 100%,0 100%)}
+.panel-r{clip-path:polygon(54.5% 0,100% 0,100% 100%,48.5% 100%)}
+.split.l-on .panel-l{clip-path:polygon(0 0,91% 0,85% 100%,0 100%)}
+.split.l-on .panel-r{clip-path:polygon(92.5% 0,100% 0,100% 100%,86.5% 100%)}
+.split.r-on .panel-l{clip-path:polygon(0 0,15% 0,9% 100%,0 100%)}
+.split.r-on .panel-r{clip-path:polygon(16.5% 0,100% 0,100% 100%,10.5% 100%)}
+
+.panel-media{position:absolute;inset:0;background:linear-gradient(155deg,#2b3a5c,#101827 62%);transition:transform 1.1s cubic-bezier(.19,1,.22,1),filter .6s ease}
+.panel-media{top:0;height:100%;
+  transition:transform 1.1s cubic-bezier(.19,1,.22,1),filter .6s ease,left .8s cubic-bezier(.19,1,.22,1),right .8s cubic-bezier(.19,1,.22,1)}
+.panel-l .panel-media{right:26%}
+.panel-r .panel-media{left:26%}
+.split.l-on .panel-l .panel-media{right:0}
+.split.l-on .panel-r .panel-media{left:70%}
+.split.r-on .panel-l .panel-media{right:70%}
+.split.r-on .panel-r .panel-media{left:0}
+.panel-media img,.panel-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* X matters in the 50/50 split (box is narrow, video overflows sideways);
+   Y matters after takeover (box goes wide, so cover crops top and bottom).
+   Anchoring high keeps the models' heads in frame and trims from the floor. */
+.panel-l .panel-media img,.panel-l .panel-media video{object-position:58% 0}
+.panel-r .panel-media img,.panel-r .panel-media video{object-position:42% 0}
+.panel-media video{opacity:0;transition:opacity .55s ease}
+.panel.is-playing .panel-media video{opacity:1}
+.panel-media:before{content:attr(data-label);position:absolute;top:0;bottom:0;display:grid;place-items:center;color:rgba(255,255,255,.34);
+  font-size:13px;letter-spacing:.34em;text-transform:uppercase}
+.panel-l .panel-media:before,.panel-r .panel-media:before{left:0;right:0}
+.panel.is-dim .panel-media{filter:brightness(.62) saturate(.85)}
+.panel.is-playing.is-dim .panel-media{filter:none}
+
+/* click-to-play control — only rendered once a video file actually loads */
+.play-btn{position:absolute;z-index:4;top:50%;left:20%;transform:translate(-50%,-50%) scale(.96);display:none;place-items:center;
+  width:78px;height:78px;padding:0;border-radius:50%;cursor:pointer;color:#fff;
+  border:1px solid rgba(255,255,255,.6);background:rgba(255,255,255,.14);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  transition:transform .45s cubic-bezier(.19,1,.22,1),background .35s ease,opacity .35s ease}
+.panel-r .play-btn{left:78%}
+.panel.no-video .play-btn{display:none}
+.play-btn:hover{background:rgba(255,255,255,.26);transform:translate(-50%,-50%) scale(1.06)}
+.play-btn i{font-style:normal;font-size:19px;line-height:1;margin-left:3px}
+.panel.is-playing .play-btn{opacity:0;pointer-events:none}
+.panel.is-playing:hover .play-btn{opacity:1;pointer-events:auto}
+.panel.is-playing .play-btn i{margin-left:0;letter-spacing:2px}
+/* hide the placeholder caption once a video is running */
+.panel.is-playing .panel-media:before{opacity:0}
+
+.panel-cta{position:absolute;z-index:5;bottom:clamp(28px,6vw,84px);display:flex;align-items:center;gap:14px;padding:13px 20px 13px 28px;border-radius:999px;
+  background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  color:var(--navy);border:1px solid rgba(194,162,76,.55);box-shadow:0 14px 34px rgba(12,22,44,.28);transform:translate(-50%,0);overflow:hidden;
+  transition:transform .5s cubic-bezier(.19,1,.22,1),box-shadow .4s ease,border-color .4s ease,color .35s ease}
+/* navy sweeps up from the base on hover */
+.panel-cta:before{content:"";position:absolute;inset:0;z-index:0;background:var(--navy);transform:translateY(101%);transition:transform .5s cubic-bezier(.19,1,.22,1)}
+.panel-cta>*{position:relative;z-index:1}
+.panel-cta:hover{color:#fff;border-color:var(--gold);box-shadow:0 20px 46px rgba(12,22,44,.4)}
+.panel-cta:hover:before{transform:translateY(0)}
+.panel-cta .cta-text{display:grid;justify-items:start;gap:3px}
+.panel-cta .cta-arrow{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1px solid currentColor;font-size:13px;line-height:1;opacity:.85;
+  transition:transform .45s cubic-bezier(.19,1,.22,1),opacity .3s ease}
+.panel-cta:hover .cta-arrow{transform:translateX(4px);opacity:1}
+.split.l-on .panel-r .panel-cta,.split.r-on .panel-l .panel-cta{opacity:0;pointer-events:none;transition:opacity .3s ease}
+.panel-l .panel-cta{left:20%}
+.panel-r .panel-cta{left:78%}
+.panel-cta small{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);transition:color .4s ease}
+.panel-cta:hover small{color:var(--gold)}
+.panel-cta strong{font-size:clamp(15px,1.5vw,20px);font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.panel.is-on .panel-cta{transform:translate(-50%,-8px);box-shadow:0 20px 46px rgba(12,22,44,.34)}
+
+/* ---------------- deco band ---------------- */
+.band{position:relative;overflow:hidden;padding:clamp(26px,4.4vw,58px) 20px;text-align:center;
+  background:linear-gradient(90deg,#16233f,#2c4374 26%,#6d8ab9 62%,#3d5788 88%,#1b2b4d)}
+.band h2{margin:0;font-family:var(--font-deco);font-size:clamp(22px,7.2vw,116px);font-weight:900;line-height:1.02;letter-spacing:.01em;
+  text-transform:uppercase;white-space:nowrap;color:#fff}
+.band .sheen{position:absolute;top:0;bottom:0;left:-40%;width:35%;pointer-events:none;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.20),transparent);animation:sweep 6.5s ease-in-out infinite}
+@keyframes sweep{0%{left:-40%}55%,100%{left:120%}}
+
+/* ---------------- footer ---------------- */
+.site-foot{padding:clamp(46px,6vw,84px) clamp(20px,3.4vw,54px) 22px}
+.foot-grid{display:grid;grid-template-columns:1.3fr .8fr 1.1fr 1.3fr;gap:clamp(24px,4vw,60px);align-items:start}
+.foot-mark{display:block;width:clamp(120px,14vw,190px);line-height:0}
+.foot-mark img{width:100%;height:auto}
+.foot-col{display:grid;gap:11px;font-size:15px;letter-spacing:.09em;text-transform:uppercase}
+.foot-col a{position:relative;width:fit-content}
+.foot-col a:after{content:"";position:absolute;left:0;bottom:-3px;width:0;height:1px;background:currentColor;transition:width .35s ease}
+.foot-col a:hover:after{width:100%}
+.foot-news h4{margin:0 0 14px;font-size:15px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.news-field{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--navy);padding-bottom:9px}
+.news-field input{flex:1;min-width:0;border:0;background:none;font-family:var(--font-serif);font-size:15px;color:var(--ink);outline:none}
+.news-field input::placeholder{color:var(--muted);letter-spacing:.04em}
+.news-field button{border:0;background:none;padding:0;font-size:19px;line-height:1;color:var(--navy);cursor:pointer;transition:transform .3s ease}
+.news-field button:hover{transform:translateX(5px)}
+.foot-social{display:flex;gap:clamp(18px,3vw,44px);margin-top:20px;font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+.foot-social a:hover{opacity:.6}
+.pay-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(30px,4vw,52px)}
+.pay{display:grid;place-items:center;width:44px;height:28px;border:1px solid var(--line);border-radius:4px;font-family:Arial,sans-serif;font-size:8px;font-weight:700;letter-spacing:.03em;color:var(--muted)}
+.foot-base{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);text-align:center;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------------- motion ---------------- */
+.rise{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .9s cubic-bezier(.19,1,.22,1)}
+.rise.seen{opacity:1;transform:none}
+
+/* ---------------- responsive ---------------- */
+@media (max-width:860px){
+  :root{--head-h:76px}
+  .split{height:auto;min-height:0;display:grid}
+  .panel{position:relative;height:62svh;min-height:340px;clip-path:none!important}
+  .panel-l,.panel-r{clip-path:none}
+  .panel-cta{left:50%!important;right:auto!important;transform:translate(-50%,0)}
+  .panel.is-on .panel-cta{transform:translate(-50%,-6px)}
+  .panel-media,.panel-l .panel-media,.panel-r .panel-media{top:0;left:0;right:0;height:100%}
+  .play-btn{display:grid}
+  .panel.no-video .play-btn{display:none}
+  .panel-l .panel-media img,.panel-l .panel-media video,
+  .panel-r .panel-media img,.panel-r .panel-media video{object-position:center}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .foot-news{grid-column:1/-1}
+}
+@media (max-width:520px){
+  .foot-grid{grid-template-columns:1fr}
+  .inquire{min-width:0;height:36px;padding:0 16px;font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .rise{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <a class="wordmark" href="#" aria-label="ADAB home"><img src="assets/adab-logo.png" alt="ADAB"></a>
+  <div class="head-right">
+    <a class="inquire" href="#">Inquire</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="drawer" id="drawer">
+  <a href="#">Home</a>
+  <a href="#">Afridi Wear</a>
+  <a href="#">Tabish Wear</a>
+  <a href="#">About</a>
+  <a href="#">Inquire</a>
+</nav>
+
+<section class="split" id="split">
+  <div class="panel panel-l" data-panel="l">
+    <div class="panel-media" data-label="Afridi Wear">
+      <img src="assets/afridi.jpg" alt="" onerror="this.remove()">
+      <video class="panel-video" muted loop playsinline preload="metadata">
+        <source src="assets/afridi.mp4" type="video/mp4">
+      </video>
+    </div>
+    <button class="play-btn" type="button" aria-label="Play Afridi Wear film"><i>&#9654;</i></button>
+    <a class="panel-cta" href="#">
+      <span class="cta-text"><small>Explore</small><strong>Afridi Wear</strong></span>
+      <span class="cta-arrow" aria-hidden="true">&#8594;</span>
+    </a>
+  </div>
+
+  <div class="panel panel-r" data-panel="r">
+    <div class="panel-media" data-label="Tabish Wear">
+      <img src="assets/tabish.jpg" alt="" onerror="this.remove()">
+      <video class="panel-video" muted loop playsinline preload="metadata">
+        <source src="assets/tabish.mp4" type="video/mp4">
+      </video>
+    </div>
+    <button class="play-btn" type="button" aria-label="Play Tabish Wear film"><i>&#9654;</i></button>
+    <a class="panel-cta" href="#">
+      <span class="cta-text"><small>Explore</small><strong>Tabish Wear</strong></span>
+      <span class="cta-arrow" aria-hidden="true">&#8594;</span>
+    </a>
+  </div>
+</section>
+
+<section class="band">
+  <span class="sheen" aria-hidden="true"></span>
+  <h2>Beyond The Expected</h2>
+</section>
+
+<footer class="site-foot">
+  <div class="foot-grid rise">
+    <div class="foot-mark"><img src="assets/adab-logo.png" alt="ADAB" loading="lazy"></div>
+
+    <div class="foot-col">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Inquire</a>
+    </div>
+
+    <div class="foot-col">
+      <a href="#">Shipping &amp; Returns</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms &amp; Conditions</a>
+    </div>
+
+    <div class="foot-news">
+      <h4>Stay Updated</h4>
+      <div class="news-field">
+        <input type="email" placeholder="Enter your email" aria-label="Email address">
+        <button type="button" aria-label="Subscribe">&#10230;</button>
+      </div>
+      <div class="foot-social">
+        <a href="#">Instagram</a>
+        <a href="#">Youtube</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pay-row" aria-label="Payment methods">
+    <span class="pay">AMEX</span>
+    <span class="pay">APPLE</span>
+    <span class="pay">DINERS</span>
+    <span class="pay">DISC</span>
+    <span class="pay">GPAY</span>
+    <span class="pay">JCB</span>
+    <span class="pay">MC</span>
+    <span class="pay">PAYPAL</span>
+    <span class="pay">VISA</span>
+  </div>
+
+  <p class="foot-base">&copy; 2026 ADAB.COM All Rights Reserved | orders@adab.com | +92 130 156086012</p>
+</footer>
+
+<script>
+/* ---- menu ---- */
+(function(){
+  var b=document.getElementById('burger'),d=document.getElementById('drawer');
+  b.addEventListener('click',function(){
+    var open=d.classList.toggle('is-open');
+    b.classList.toggle('is-open',open);
+    b.setAttribute('aria-expanded',String(open));
+  });
+  d.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      d.classList.remove('is-open');b.classList.remove('is-open');b.setAttribute('aria-expanded','false');
+    });
+  });
+})();
+
+/* ---- diagonal split: hovered side takes the space ---- */
+(function(){
+  var split=document.getElementById('split'),
+      panels=[].slice.call(split.querySelectorAll('.panel')),
+      fine=window.matchMedia('(hover:hover) and (pointer:fine)');
+  if(!fine.matches)return;
+
+  panels.forEach(function(p){
+    p.addEventListener('mouseenter',function(){
+      var side=p.dataset.panel;
+      split.classList.toggle('l-on',side==='l');
+      split.classList.toggle('r-on',side==='r');
+      panels.forEach(function(o){
+        o.classList.toggle('is-on',o===p);
+        o.classList.toggle('is-dim',o!==p);
+      });
+    });
+  });
+
+  split.addEventListener('mouseleave',function(){
+    split.classList.remove('l-on','r-on');
+    panels.forEach(function(o){o.classList.remove('is-on','is-dim')});
+  });
+})();
+
+/* ---- hover to play on desktop, tap to play on touch ---- */
+(function(){
+  var split=document.getElementById('split'),
+      panels=[].slice.call(document.querySelectorAll('.panel')),
+      fine=window.matchMedia('(hover:hover) and (pointer:fine)');
+
+  function stopAll(except){
+    panels.forEach(function(o){
+      if(o===except)return;
+      var v=o.querySelector('.panel-video');
+      if(v){v.pause();v.currentTime=0;}
+      o.classList.remove('is-playing');
+    });
+  }
+
+  panels.forEach(function(panel){
+    var video=panel.querySelector('.panel-video');
+    if(!video)return;
+
+    function noVideo(){panel.classList.add('no-video');panel.classList.remove('is-playing');}
+    video.addEventListener('error',noVideo);
+    video.querySelector('source').addEventListener('error',noVideo);
+
+    function play(){
+      if(panel.classList.contains('no-video')||panel.classList.contains('is-playing'))return;
+      stopAll(panel);
+      var pr=video.play();
+      // a rejected play() is usually just a fast hover interrupting the last one,
+      // so back the state out rather than writing the panel off as broken
+      if(pr&&pr.catch)pr.catch(function(){panel.classList.remove('is-playing')});
+      panel.classList.add('is-playing');
+    }
+    function stop(){
+      video.pause();video.currentTime=0;
+      panel.classList.remove('is-playing');
+    }
+
+    if(fine.matches){
+      panel.addEventListener('mouseenter',play);
+    }else{
+      var btn=panel.querySelector('.play-btn');
+      function toggle(){panel.classList.contains('is-playing')?stop():play();}
+      if(btn)btn.addEventListener('click',function(e){e.stopPropagation();toggle();});
+      panel.addEventListener('click',function(){
+        if(!panel.classList.contains('no-video'))toggle();
+      });
+    }
+  });
+
+  // cursor leaves the hero entirely — reset both films to their first frame
+  if(fine.matches)split.addEventListener('mouseleave',function(){stopAll(null)});
+
+  // the Explore link should navigate, not toggle a film
+  document.querySelectorAll('.panel-cta').forEach(function(a){
+    a.addEventListener('click',function(e){e.stopPropagation()});
+  });
+})();
+
+/* ---- header flips to light once the hero is behind it ---- */
+(function(){
+  var head=document.querySelector('.site-head'),
+      hero=document.getElementById('split');
+  if(!head||!hero)return;
+  // flips on the first bit of scroll, not once the whole hero has passed —
+  // on a tall screen the page is too short for that to ever happen
+  function sync(){
+    head.classList.toggle('is-solid',window.scrollY>40);
+  }
+  window.addEventListener('scroll',sync,{passive:true});
+  window.addEventListener('resize',sync,{passive:true});
+  sync();
+})();
+
+/* ---- scroll reveal ---- */
+(function(){
+  var items=document.querySelectorAll('.rise');
+  if(!items.length)return;
+  if(!('IntersectionObserver' in window)){
+    items.forEach(function(el){el.classList.add('seen')});return;
+  }
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('seen');io.unobserve(e.target);}});
+  },{rootMargin:'0px 0px -10% 0px'});
+  items.forEach(function(el){io.observe(el)});
+})();
+</script>
+</body>
+</html>
