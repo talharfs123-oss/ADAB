@@ -88,10 +88,10 @@ a{color:inherit;text-decoration:none}
 .panel{position:absolute;inset:0;overflow:hidden;background:linear-gradient(155deg,#2b3a5c,#101827 62%);transition:clip-path .8s cubic-bezier(.19,1,.22,1)}
 .panel-l{clip-path:polygon(0 0,53% 0,47% 100%,0 100%)}
 .panel-r{clip-path:polygon(54.5% 0,100% 0,100% 100%,48.5% 100%)}
-.split.l-on .panel-l{clip-path:polygon(0 0,91% 0,85% 100%,0 100%)}
-.split.l-on .panel-r{clip-path:polygon(92.5% 0,100% 0,100% 100%,86.5% 100%)}
-.split.r-on .panel-l{clip-path:polygon(0 0,15% 0,9% 100%,0 100%)}
-.split.r-on .panel-r{clip-path:polygon(16.5% 0,100% 0,100% 100%,10.5% 100%)}
+.split.l-on .panel-l{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+.split.l-on .panel-r{clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%)}
+.split.r-on .panel-l{clip-path:polygon(0 0,0 0,0 100%,0 100%)}
+.split.r-on .panel-r{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
 
 .panel-media{position:absolute;inset:0;background:linear-gradient(155deg,#2b3a5c,#101827 62%);transition:transform 1.1s cubic-bezier(.19,1,.22,1),filter .6s ease}
 .panel-media{top:0;height:100%;
@@ -99,8 +99,8 @@ a{color:inherit;text-decoration:none}
 .panel-l .panel-media{right:26%}
 .panel-r .panel-media{left:26%}
 .split.l-on .panel-l .panel-media{right:0}
-.split.l-on .panel-r .panel-media{left:70%}
-.split.r-on .panel-l .panel-media{right:70%}
+.split.l-on .panel-r .panel-media{left:100%}
+.split.r-on .panel-l .panel-media{right:100%}
 .split.r-on .panel-r .panel-media{left:0}
 .panel-media img,.panel-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 /* X matters in the 50/50 split (box is narrow, video overflows sideways);
@@ -154,7 +154,7 @@ a{color:inherit;text-decoration:none}
 .panel.is-on .panel-cta{transform:translate(-50%,-8px);box-shadow:0 20px 46px rgba(12,22,44,.34)}
 
 /* ---------------- deco band ---------------- */
-.band{position:relative;overflow:hidden;padding:clamp(26px,4.4vw,58px) 20px;text-align:center;
+.band{position:relative;overflow:hidden;margin-top:clamp(40px,6vw,90px);padding:clamp(26px,4.4vw,58px) 20px;text-align:center;
   background:linear-gradient(90deg,#16233f,#2c4374 26%,#6d8ab9 62%,#3d5788 88%,#1b2b4d)}
 .band h2{margin:0;font-family:var(--font-deco);font-size:clamp(22px,7.2vw,116px);font-weight:900;line-height:1.02;letter-spacing:.01em;
   text-transform:uppercase;white-space:nowrap;color:#fff}
@@ -238,7 +238,7 @@ a{color:inherit;text-decoration:none}
     <div class="panel-media" data-label="Afridi Wear">
       <img src="assets/afridi.jpg" alt="" onerror="this.remove()">
       <video class="panel-video" muted loop playsinline preload="metadata">
-        <source src="assets/afridivideo.mp4" type="video/mp4">
+        <source src="assets/afridi.mp4" type="video/mp4">
       </video>
     </div>
     <button class="play-btn" type="button" aria-label="Play Afridi Wear film"><i>&#9654;</i></button>
@@ -252,7 +252,7 @@ a{color:inherit;text-decoration:none}
     <div class="panel-media" data-label="Tabish Wear">
       <img src="assets/tabish.jpg" alt="" onerror="this.remove()">
       <video class="panel-video" muted loop playsinline preload="metadata">
-        <source src="assets/tabish.jpg" type="video/mp4">
+        <source src="assets/tabish.mp4" type="video/mp4">
       </video>
     </div>
     <button class="play-btn" type="button" aria-label="Play Tabish Wear film"><i>&#9654;</i></button>
@@ -265,7 +265,7 @@ a{color:inherit;text-decoration:none}
 
 <section class="band">
   <span class="sheen" aria-hidden="true"></span>
-  <h2>Beyond Expectation</h2>
+  <h2>Beyond The Expected</h2>
 </section>
 
 <footer class="site-foot">
